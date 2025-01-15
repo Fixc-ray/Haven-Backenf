@@ -3,6 +3,7 @@ from flask_cors import CORS
 from extensions import db
 from flask_migrate import Migrate
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rooms.db'
@@ -97,4 +98,5 @@ def seed_rooms():
 if __name__ == "__main__":
     with app.app_context():
         seed_rooms()
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=5000, debug=True)
